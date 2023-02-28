@@ -35,7 +35,11 @@ def build():
         bat = int(input("Batch: "))
         age = int(input("Age: "))
         stu[i] = Student(name, code, branch, bat, age)
-
+        for j in range(i):
+            if stu[j] == code:
+                print("same id enter again")
+                deleteIndex(j)
+                i-=1
     show_menu()
 
 def insert():
@@ -56,12 +60,11 @@ def insert():
     show_menu()
 
 def deleteIndex(i):
-    for j in range(i, num - 1):
-        stu[j].name = stu[j].name
-        stu[j].code = stu[j].code
-        stu[j].branch = stu[j].branch
-        stu[j].bat = stu[j].bat
-        stu[j].age = stu[j].age
+    del stu[i].name
+    del stu[i].code
+    del stu[i].branch
+    del stu[i].bat
+    del stu[i].age
 
 def deleteRecord():
     code = int(input("Enter the Student ID to Delete Record: "))
@@ -92,7 +95,8 @@ def display():
     print("\t\tName\tStudent ID\tBranch\t\tBatch\tAge")
     print("\t  ","_"*60)
     for i in range(num):
-        print(f"\t\t{stu[i].name}\t{stu[i].code}\t\t{stu[i].branch}\t{stu[i].age}\t{stu[i].bat}")
+        print(f"\t\t{stu[i].name}\t{stu[i].code}\t\t{stu[i].branch}\t{stu[i].bat}\t{stu[i].age}")
+    show_menu()
 
 
 def updateRecord():
@@ -133,10 +137,10 @@ def show_menu():
     elif (option == 3):
         deleteRecord()
     elif (option == 4):
-        return
+        searchRecord()
     elif (option == 5):
         display()
-    elif (option == 5):
+    elif (option == 6):
         updateRecord()
     elif (option == 7):
         return
